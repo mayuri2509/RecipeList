@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.container {
+    display: flex;
+    justify-content: center; 
+    height: 100vh; 
+   
+}
+.container2 {
+    text-align: center; 
+}
+h1{
+    color: rgb(250, 245, 247);
+}
+#input{
+   
+    width: auto;
+    height:25px;
+    font-size: large;
+  font-family: 'Times New Roman', Times, serif;
+}
