@@ -11,28 +11,31 @@ class RecipeSearch extends Component {
   
   fetchRecipes = debounce(async (query) => {
     if (!query) return;
-    this.setState({ loading: true });
-
+  
     try {
       const response = await fetch(`https://dummyjson.com/recipes/search?q=${query}`);
       const data = await response.json();
       this.setState({ suggestions: data.recipes.slice(0, 5), loading: false });
     } catch (error) {
+      this.setState({ loading: true });
       console.error("Error fetching recipes:", error);
       this.setState({ loading: false });
     }
   }, 300);
-
+  
   handleInputChange = (event) => {
     const query = event.target.value;
     this.setState({ query, selectedRecipe: null });
+  
     if (query.trim()) {
-      this.fetchRecipes(query);
+      this.setState({ loading: true });
+      this.fetchRecipes(query); 
     } else {
-      this.setState({ suggestions: [] });
+      this.setState({ suggestions: [], loading: false });
     }
   };
-
+  
+  
   handleSuggestionClick = (recipe) => {
     this.setState({ selectedRecipe: recipe, suggestions: [], query: recipe.name });
   };
@@ -87,4 +90,3 @@ class RecipeSearch extends Component {
 }
 
 export default RecipeSearch;
-
